@@ -1,0 +1,6 @@
+TableShift_Dataset/
+results/
+*.pt
+__pycache__/
+*.pyc
+.claude/
