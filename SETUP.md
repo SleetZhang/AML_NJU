@@ -34,7 +34,7 @@
 
 ```bash
 cd /root/autodl-tmp
-git clone https://github.com/<你的用户名>/AML_Assignment.git
+git clone https://github.com/SleetZhang/AML_NJU.git
 cd AML_Assignment
 ```
 
