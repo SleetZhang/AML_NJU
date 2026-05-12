@@ -3,6 +3,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from sklearn.metrics import balanced_accuracy_score
+from tqdm import tqdm
 
 from model import corrupt
 
@@ -25,14 +26,13 @@ def train(model, train_loader, val_loader, device,
     for epoch in range(1, max_epochs + 1):
         # --- Training ---
         model.train()
-        for X, y in train_loader:
+        pbar = tqdm(train_loader, desc=f"Epoch {epoch:3d} [train]", leave=False)
+        for X, y in pbar:
             X, y = X.to(device), y.to(device)
 
-            # Classification forward (clean X)
             logits = model(X)
             ce_loss = F.cross_entropy(logits, y)
 
-            # Reconstruction forward (corrupted X)
             X_tilde, m = corrupt(X, mask_ratio)
             h_tilde = model.encoder(X_tilde)
             X_hat = model.reconstructor(h_tilde)
@@ -42,6 +42,7 @@ def train(model, train_loader, val_loader, device,
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+            pbar.set_postfix(loss=f"{loss.item():.4f}")
 
         # --- Validation: Balanced Accuracy ---
         model.eval()

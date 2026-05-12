@@ -5,7 +5,7 @@
 克隆仓库并解压数据集后，目录结构如下：
 
 ```
-/root/autodl-tmp/AML_Assignment/
+/root/autodl-tmp/AML_NJU/
 ├── src/
 │   ├── model.py
 │   ├── data_loader.py
@@ -34,8 +34,8 @@
 
 ```bash
 cd /root/autodl-tmp
-git clone https://github.com/<你的用户名>/AML_Assignment.git
-cd AML_Assignment
+git clone https://github.com/SleetZhang/AML_NJU.git
+cd AML_NJU
 ```
 
 > 仓库使用 Git LFS 存储数据集压缩包，clone 时会自动下载，无需额外操作。
@@ -45,7 +45,7 @@ cd AML_Assignment
 ## 第二步：解压数据集
 
 ```bash
-cd /root/autodl-tmp/AML_Assignment
+cd /root/autodl-tmp/AML_NJU
 unzip TableShift_Dataset.zip
 ```
 
@@ -79,7 +79,7 @@ tmux new -s exp
 ### 服务器 1（assistments / brfss_diabetes / nhanes_lead）
 
 ```bash
-cd /root/autodl-tmp/AML_Assignment
+cd /root/autodl-tmp/AML_NJU
 python src/run_all.py \
     --datasets assistments brfss_diabetes nhanes_lead \
     --seeds 0 1 2
@@ -88,7 +88,7 @@ python src/run_all.py \
 ### 服务器 2（acsunemployment / physionet / acsfoodstamps）
 
 ```bash
-cd /root/autodl-tmp/AML_Assignment
+cd /root/autodl-tmp/AML_NJU
 python src/run_all.py \
     --datasets acsunemployment physionet acsfoodstamps \
     --seeds 0 1 2

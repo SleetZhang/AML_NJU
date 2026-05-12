@@ -1,5 +1,6 @@
 import torch
 import torch.nn.functional as F
+from tqdm import tqdm
 
 
 def configure_model_for_tta(model):
@@ -31,10 +32,9 @@ def tent_adapt_and_predict(model, ood_loader, device, lr=1e-4):
     )
 
     all_preds = []
-    for X, _ in ood_loader:
+    for X, _ in tqdm(ood_loader, desc="TENT  ", leave=False):
         X = X.to(device)
 
-        # One gradient step per batch
         logits = model(X)
         probs = F.softmax(logits, dim=1)
         entropy = -(probs * torch.log(probs + 1e-8)).sum(dim=1).mean()
@@ -42,7 +42,6 @@ def tent_adapt_and_predict(model, ood_loader, device, lr=1e-4):
         entropy.backward()
         optimizer.step()
 
-        # Predict after adaptation
         with torch.no_grad():
             preds = model(X).argmax(dim=1)
         all_preds.append(preds.cpu())
