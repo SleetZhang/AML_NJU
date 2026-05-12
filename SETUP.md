@@ -34,7 +34,7 @@
 
 ```bash
 cd /root/autodl-tmp
-git clone https://github.com/SleetZhang/AML_NJU.git
+git clone https://ghfast.top/https://github.com/SleetZhang/AML_NJU.git
 cd AML_NJU
 ```
 
@@ -61,7 +61,7 @@ ls TableShift_Dataset/
 ## 第三步：安装依赖
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 > AutoDL 镜像已预装 CUDA 版 PyTorch，pip install 会复用已有版本，通常只需安装 pandas / scikit-learn / tqdm。
